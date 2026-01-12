@@ -1,6 +1,9 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -g -I./common
 
+# Find all .c files in common/ recursively
+COMMON_SOURCES = $(shell find common -name '*.c')
+
 # Default target shows help
 .DEFAULT_GOAL := help
 
@@ -9,7 +12,7 @@ CFLAGS = -Wall -Wextra -g -I./common
 .PHONY: run
 run:
 	@echo "Building $(DAY)..."
-	@$(CC) $(CFLAGS) -I./$(DAY) common/utils.c $(DAY)/main.c $(DAY)/part1.c $(DAY)/part2.c -o $(DAY)/solution
+	@$(CC) $(CFLAGS) -I./$(DAY) $(COMMON_SOURCES) $(DAY)/main.c $(DAY)/part1.c $(DAY)/part2.c -o $(DAY)/solution
 	@echo "Running $(DAY)..."
 	@$(DAY)/solution
 
@@ -20,7 +23,7 @@ year:
 	@for day in $(YEAR)/day*/main.c; do \
 		dir=$$(dirname $$day); \
 		echo "Building $$dir..."; \
-		$(CC) $(CFLAGS) -I./$$dir common/utils.c $$dir/main.c $$dir/part1.c $$dir/part2.c -o $$dir/solution; \
+		$(CC) $(CFLAGS) -I./$$dir $(COMMON_SOURCES) $$dir/main.c $$dir/part1.c $$dir/part2.c -o $$dir/solution; \
 	done
 
 # Clean all executables

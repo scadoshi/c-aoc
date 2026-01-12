@@ -1,0 +1,21 @@
+# Compiled executables
+solution
+**/solution
+
+# Debug symbols (macOS)
+*.dSYM/
+**/*.dSYM/
+
+# Object files
+*.o
+*.a
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
